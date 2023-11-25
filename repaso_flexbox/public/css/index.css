@@ -1,0 +1,35 @@
+body{
+    background-color: beige ;
+}
+
+
+.caja{
+    border: 1px solid rgb(70,69,69);
+    background-color: white;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold; /* negrilla */
+    width: 120px;
+    height: 120px;
+    line-height: 120px; /*centrar*/ 
+    text-align: center; /* centra el texto */
+    margin: 5px; /* margen externo de la caja*/
+}
+
+.flex-container{
+    border:1px solid black;
+    background: #ccc;
+    display: flex; /*coloca los elementos en linea recta uno al lado del otro*/
+    padding: 10px; /* nargen interno */
+    flex-direction: row;
+    flex-wrap: wrap; /* acomoda los items adaptandolos al espacio y bajandolos */
+    /* justify-content: space-between;  modula el espacio horisontal entre cada item  manera responsive*/
+    justify-content: center; /* modula el espacio horisontal entre cada item  manera responsive*/
+   /*  align-items: center; posision de items de manera vertical de manera responsive*/
+   /* align-content: center  centra los elementos segun el largo*/;
+   align-content: center/* centra los elementos segun el largo*/;
+   height: 800px;
+
+    /* flex-direction: column;  organiza los elementos de manera vertical */
+   /* flex-direction: row-reverse;  de derecha a izqueirda */
+}
