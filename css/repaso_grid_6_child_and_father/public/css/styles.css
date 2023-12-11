@@ -29,3 +29,9 @@ body{
     padding: 20px;
     border: 1px solid black;
 }
+
+
+.c1{
+    grid-column: 1/4; /* ocupa las 4 columnas de manera horizontal */
+    background: lightskyblue;
+}
