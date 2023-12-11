@@ -29,7 +29,3 @@ body{
     padding: 20px;
     border: 1px solid black;
 }
-
-.c1{
-    grid-column: ; /* cuanto espacio ocupa dentro del grid en general*/
-}
