@@ -16,6 +16,12 @@ app.use(cors());
 app.use(express.json());
 
 // Crear rutas
+app.get("/probando", (req, res) =>{
+    console.log("Se esta ejecutando el endpoint probando");
+    return res.status(200).json({
+        endpoint: "prueba"
+    })
+})
 
 
 // Crear servidor y escuchar peticiones http
