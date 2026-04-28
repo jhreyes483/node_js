@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Controller = require("../controllers/article.js");
+;
+const ControllerArticle = require("../controllers/article.js");
 
 // Rutas de prueba
-router.get("/ruta-de-prueba", Controller.prueba);
+router.get("/ruta-de-prueba", ControllerArticle.prueba);
+router.post("/crear", ControllerArticle.create)
 
 module.exports = router;
 
