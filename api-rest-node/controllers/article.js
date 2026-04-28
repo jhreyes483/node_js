@@ -1,4 +1,6 @@
 const validator = require("validator")
+const Article = require("../models/articles");
+
 
 const prueba = (req, res) => {
     return res.status(200).json({
@@ -12,35 +14,54 @@ const controller = {
 }
 
 
-const create = (req, res) => {
-    // Recoger los parametros por post a guardar
-    let parametros = req.body;
-    // Validar los datos
-    try{    
-        let validar_titulo = !validator.isEmpty(parametros.tittle) && validator.isLength(parametros.tittle, {nmin:1, max:10});
-        let validar_contenido = !validator.isEmpty(parametros.content);
+const create = async (req, res) => {
+  try {
+    // Recoger parámetros
+    let { tittle, content } = req.body;
 
-        if(!validar_contenido || !validar_titulo){
-            throw new Error("No se ha validado la informacion")
-        }
-
-    }catch(error){
-        return res.status(400).json({
-            status: "error",
-            mensaje: "Fatan datos por enviar "+error
-        })
+    // Validar existencia primero (evita crasheos)
+    if (!tittle || !content) {
+      return res.status(400).json({
+        status: "error",
+        mensaje: "Faltan datos por enviar"
+      });
     }
 
-    // Crear el objeto
+    // Validaciones con validator
+    let validar_titulo = !validator.isEmpty(tittle) &&
+                         validator.isLength(tittle, { min: 1, max: 100 });
 
-    // Guardar el articulo en la base de datos    
+    let validar_contenido = !validator.isEmpty(content);
 
-    // Devolver resultado
+    if (!validar_titulo || !validar_contenido) {
+      return res.status(400).json({
+        status: "error",
+        mensaje: "Datos no válidos"
+      });
+    }
+
+    // Crear objeto limpio
+    const articulo = new Article({
+      tittle: tittle.trim(),
+      content: content.trim()
+    });
+
+    // Guardar en BD
+    const articuloGuardado = await articulo.save();
+
     return res.status(200).json({
-        mensaje: "Accion de guardar",
-        parametros
-    })
-}
+      status: "success",
+      articulo: articuloGuardado,
+      mensaje: "Artículo creado con éxito"
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      mensaje: "Error interno al guardar el artículo "+ error
+    });
+  }
+};
 
 
 module.exports = {
