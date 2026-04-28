@@ -65,7 +65,9 @@ const create = async (req, res) => {
 
 const listar = async (req, res) => {
   try {
-    const articulos = await Article.find();
+    const articulos = await Article.find({})
+                                   //.limit(3)
+                                   articulos.sort({fecha: -1});
 
     if (!articulos || articulos.length === 0) {
       return res.status(404).json({
@@ -76,6 +78,8 @@ const listar = async (req, res) => {
 
     return res.status(200).json({
       status: "success",
+      //parametro_url: req.params.ultimos,
+      contador: articulos.length,
       articulos
     });
 
